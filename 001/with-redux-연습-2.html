@@ -36,6 +36,14 @@
             원
         </button>
 
+        <button onclick="store.dispatch({type:'CHANGE_COLOR', color:'red'});">
+            빨간색
+        </button>
+
+        <button onclick="store.dispatch({type:'CHANGE_COLOR', color:'blue'});">
+            파란색
+        </button>
+
         <br /><br /><br />
 
         <div id="one"></div>
@@ -48,12 +56,15 @@
                 if (state === undefined) {
                     return {
                         borderRadius: "0px",
+                        color: "white",
                     };
                 }
 
                 var newState;
                 if (action.type === "CHANGE_RADIUS") {
                     newState = { ...state, borderRadius: action.borderRadius };
+                } else if (action.type === "CHANGE_COLOR") {
+                    newState = { ...state, color: action.color };
                 }
                 return newState;
             }
@@ -68,7 +79,7 @@
             function one() {
                 var state = store.getState();
                 document.querySelector("#one").innerHTML = `
-                    <div class="container" style="border-radius:${state.borderRadius}"></div>
+                    <div class="container" style="border-radius:${state.borderRadius};background-color:${state.color}"></div>
                 `;
             }
             store.subscribe(one);
@@ -77,7 +88,7 @@
             function two() {
                 var state = store.getState();
                 document.querySelector("#two").innerHTML = `
-                    <div class="container" style="border-radius:${state.borderRadius}"></div>
+                    <div class="container" style="border-radius:${state.borderRadius};background-color:${state.color}"></div>
                 `;
             }
             store.subscribe(two);
@@ -86,7 +97,7 @@
             function three() {
                 var state = store.getState();
                 document.querySelector("#three").innerHTML = `
-                    <div class="container" style="border-radius:${state.borderRadius}"></div>
+                    <div class="container" style="border-radius:${state.borderRadius};background-color:${state.color}"></div>
                 `;
             }
             store.subscribe(three);
